@@ -177,12 +177,59 @@ header .hbar{border-radius:22px}
 .search{border-radius:99px;padding:0 18px}
 .chip{transition:.18s}.chip:hover{transform:translateY(-1px)}
 .viewnav{border-radius:99px}.viewnav button{border-radius:99px}
+
+/* ===== MARKET v3 — như shop thị trường ===== */
+:root{--r:20px}
+body{font-size:15.5px}
+.topbar{position:relative;z-index:5;background:linear-gradient(90deg,#6d28d9,#db2777,#0891b2);color:#fff;text-align:center;font-weight:800;font-size:13px;padding:8px 14px;letter-spacing:.2px}
+.topbar b{background:rgba(255,255,255,.22);padding:2px 9px;border-radius:99px;margin-left:6px}
+header{top:10px}
+.hbar{padding:12px 16px;gap:10px}
+.logo{font-size:20px}
+.logo-mark{width:44px;height:44px;border-radius:14px}
+.hero{display:grid;grid-template-columns:1.55fr 1fr;gap:18px;background:none;border:none;box-shadow:none;padding:0;overflow:visible;margin-top:18px}
+@media(max-width:760px){.hero{grid-template-columns:1fr}}
+.hero-main{background:linear-gradient(125deg,rgba(109,40,217,.94),rgba(219,39,119,.88) 55%,rgba(8,145,178,.9));border:1px solid rgba(255,255,255,.5);border-radius:28px;padding:32px 28px;color:#fff;position:relative;overflow:hidden;box-shadow:0 24px 50px rgba(124,58,237,.30)}
+.hero-main::before{content:"";position:absolute;width:320px;height:320px;border-radius:50%;background:rgba(255,255,255,.15);right:-80px;top:-120px}
+.hero-side{display:grid;gap:18px}
+.promo{border-radius:28px;padding:22px;color:#fff;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,.5);box-shadow:0 18px 38px rgba(80,50,180,.20)}
+.promo.p1{background:linear-gradient(130deg,#0ea5e9,#2563eb)}
+.promo.p2{background:linear-gradient(130deg,#f59e0b,#ef4444)}
+.promo .pt{font-size:19px;font-weight:900;line-height:1.25}
+.promo .ps{font-size:13px;opacity:.92;margin-top:5px;font-weight:600}
+.promo .pb{display:inline-block;margin-top:12px;background:#fff;color:#111827;font-weight:900;font-size:13px;padding:8px 15px;border-radius:99px}
+.hero h1,.hero-main h1{font-size:33px;font-weight:900;line-height:1.18;letter-spacing:-.3px;position:relative;z-index:1}
+.hero-main p{color:rgba(255,255,255,.9);margin-top:8px;position:relative;z-index:1}
+.hero-badges,.hero-cta,.hero-stats{position:relative;z-index:1}
+.sec-head{display:flex;align-items:center;gap:12px;margin:28px 0 14px}
+.sec-head .bar{width:5px;height:24px;border-radius:3px;background:var(--grad)}
+.sec-head h2{font-size:21px;font-weight:900;letter-spacing:-.2px}
+.sec-head .more{margin-left:auto;color:var(--acc);font-weight:800;font-size:13.5px}
+.grid{grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:16px}
+@media(max-width:480px){.grid{grid-template-columns:repeat(2,1fr);gap:11px}.pbody{padding:12px}.pname{font-size:14.5px}.price{font-size:16.5px}}
+.pcard{border-radius:22px}
+.pcard:hover{transform:translateY(-5px) scale(1.01)}
+.pimg{height:150px}
+.pcat{display:inline-block;background:rgba(124,58,237,.1);padding:3px 9px;border-radius:99px;width:fit-content}
+.prow{border-top:1px dashed rgba(124,58,237,.16);padding-top:10px}
+.mnav{position:fixed;left:50%;transform:translateX(-50%);bottom:12px;z-index:60;display:flex;gap:2px;background:rgba(255,255,255,.72);backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);border:1px solid var(--stroke);border-radius:99px;padding:6px;box-shadow:0 18px 40px rgba(60,30,140,.24)}
+.mnav button{border:none;background:transparent;padding:9px 17px;border-radius:99px;font-weight:800;font-size:13.5px;color:var(--dim)}
+.mnav button.on{background:var(--grad);color:#fff;box-shadow:0 8px 18px rgba(124,58,237,.3)}
+footer{padding-bottom:110px;text-align:left}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:18px;background:var(--glass);backdrop-filter:blur(20px);border:1px solid var(--stroke);border-radius:24px;padding:22px;box-shadow:var(--shadow)}
+@media(max-width:700px){.foot-grid{grid-template-columns:1fr 1fr}}
+.foot-grid h4{font-size:14px;font-weight:900;margin-bottom:9px;color:var(--text)}
+.foot-grid a,.foot-grid p{display:block;color:var(--dim);font-size:13px;font-weight:600;margin-bottom:6px}
+.payrow{display:flex;gap:7px;flex-wrap:wrap;margin-top:8px}
+.payrow span{background:rgba(255,255,255,.75);border:1px solid var(--stroke);border-radius:9px;padding:5px 10px;font-size:12px;font-weight:900;color:var(--text)}
+.copyright{text-align:center;margin-top:16px;color:var(--dim2);font-size:12.5px}
 </style>
 </head>
 
 </head>
 <body>
 
+<div class="topbar">Shop bán hàng tự động 24/7 — Giao key ngay sau khi thanh toán <b>UY TÍN</b></div>
 <header>
   <div class="wrap hbar">
     <div class="logo">
@@ -207,7 +254,7 @@ header .hbar{border-radius:22px}
 
   <!-- ============ STOREFRONT ============ -->
   <main id="viewShop">
-    <section class="hero">
+    <section class="hero"><div class="hero-main">
       <h1>Mua key &amp; file <span>giao tự động</span><br>trong vài giây</h1>
       <p>Nạp tiền vào ví, bấm mua — hệ thống tự giao hàng ngay sau khi thanh toán. Dữ liệu chạy trên backend Supabase thật, dùng chung cho mọi khách.</p>
       <div class="hero-badges">
@@ -218,6 +265,11 @@ header .hbar{border-radius:22px}
       <div class="hero-cta"><a class="cta1" href="#tabProducts">Mua ngay</a><a class="cta2" href="#" onclick="showShopTab('wallet');return false">Nạp tiền vào ví</a></div>
       <div class="hero-stats"><div class="hstat"><b>24/7</b><span>Giao hàng tự động</span></div><div class="hstat"><b>10.000đ</b><span>Nạp tối thiểu</span></div><div class="hstat"><b>Tức thì</b><span>Nhận key sau khi mua</span></div></div>
 
+    </div>
+      <div class="hero-side">
+        <div class="promo p1"><div class="pt">Nạp tiền bằng QR</div><div class="ps">Quét VietQR, điền sẵn số tiền + mã nạp, duyệt nhanh trong ít phút</div><span class="pb">Nạp ngay</span></div>
+        <div class="promo p2"><div class="pt">Mua là nhận ngay</div><div class="ps">Hệ thống tự giao key/file ngay khi bấm mua, không phải chờ gửi tay</div><span class="pb">Xem sản phẩm</span></div>
+      </div>
     </section>
 
     <div class="trust">
@@ -239,6 +291,7 @@ header .hbar{border-radius:22px}
     </div>
 
     <section id="tabProducts">
+      <div class="sec-head"><div class="bar"></div><h2>Sản phẩm đang bán</h2><span class="more">Giao tự động 24/7</span></div>
       <div class="toolbar">
         <div class="search">
           <svg viewBox="0 0 24 24"><path d="M10 2a8 8 0 1 0 4.9 14.3l5 5 1.4-1.4-5-5A8 8 0 0 0 10 2zm0 2a6 6 0 1 1 0 12 6 6 0 0 1 0-12z"/></svg>
@@ -289,7 +342,13 @@ header .hbar{border-radius:22px}
   </main>
 
   <footer>
-    <div id="footText">SHOP NOVA — Hệ thống bán hàng tự động</div>
+    <div class="foot-grid">
+    <div><h4 id="footText">SHOP NOVA</h4><p>Hệ thống bán key &amp; file tự động. Nạp ví, bấm mua, nhận hàng tức thì — mọi lúc mọi nơi.</p><div class="payrow"><span>VietQR</span><span>MB Bank</span><span>Chuyển khoản 24/7</span></div></div>
+    <div><h4>Mua hàng</h4><a href="#" onclick="showShopTab('products');return false">Sản phẩm</a><a href="#" onclick="showShopTab('wallet');return false">Nạp tiền</a><a href="#" onclick="showShopTab('orders');return false">Đơn của tôi</a></div>
+    <div><h4>Hỗ trợ</h4><p id="footSupport">Zalo hỗ trợ hiển thị ở đầu trang</p><p>Admin duyệt nạp trong ít phút sau khi chuyển khoản đúng mã.</p></div>
+    <div><h4>Cam kết</h4><p>Giao hàng tự động</p><p>Hoàn ví khi lỗi hệ thống</p><p>Bảo mật tài khoản bằng mã hoá</p></div>
+  </div>
+  <div class="copyright">© 2026 SHOP NOVA — Bán hàng tự động 24/7</div>
   </footer>
 </div>
 
@@ -332,6 +391,7 @@ header .hbar{border-radius:22px}
   </div>
 </div>
 
+<nav class="mnav"><button class="on" data-mnav="products" onclick="showShopTab('products')">Trang chủ</button><button data-mnav="wallet" onclick="showShopTab('wallet')">Ví tiền</button><button data-mnav="orders" onclick="showShopTab('orders')">Đơn của tôi</button></nav>
 <div class="toast" id="toast"></div>
 
 <script>
@@ -563,6 +623,7 @@ function showView(v) {
 function showShopTab(tab) {
   showView("shop");
   document.querySelectorAll("#shopNav button").forEach(b => b.classList.toggle("on", b.dataset.nav === tab));
+  document.querySelectorAll(".mnav button").forEach(b => b.classList.toggle("on", b.dataset.mnav === tab));
   $("tabProducts").classList.toggle("hidden", tab !== "products");
   $("tabWallet").classList.toggle("hidden", tab !== "wallet");
   $("tabOrders").classList.toggle("hidden", tab !== "orders");
