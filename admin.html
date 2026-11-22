@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>SHOP NOVA — Admin Glass</title>
+
+<style>
+:root{
+  --text:#16122b; --dim:#5b5675; --dim2:#8a86a3;
+  --acc:#7c3aed; --acc2:#d946ef; --ok:#0a9d5c; --warn:#d97706; --err:#e11d48;
+  --grad:linear-gradient(120deg,#7c3aed,#d946ef 55%,#06b6d4);
+  --glass:rgba(255,255,255,.58); --glass2:rgba(255,255,255,.72);
+  --stroke:rgba(255,255,255,.75); --stroke2:rgba(124,58,237,.14);
+  --shadow:0 18px 40px rgba(80,50,180,.14), inset 0 1px 0 rgba(255,255,255,.9);
+  --r:22px;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;font-size:15px;line-height:1.55;min-height:100vh;background:#eef0ff;position:relative;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;z-index:-2;background:
+ radial-gradient(700px 500px at 8% -5%,rgba(124,58,237,.38),transparent 60%),
+ radial-gradient(650px 480px at 95% 8%,rgba(6,182,212,.34),transparent 60%),
+ radial-gradient(700px 600px at 50% 110%,rgba(217,70,239,.30),transparent 60%),
+ linear-gradient(160deg,#f4f2ff,#e8f7ff 45%,#fdf2ff)}
+body::after{content:"";position:fixed;inset:0;z-index:-1;backdrop-filter:saturate(140%);pointer-events:none}
+button{font-family:inherit;cursor:pointer}
+input,select,textarea{font-family:inherit;font-size:15px;color:var(--text)}
+a{color:var(--acc);text-decoration:none;font-weight:700}
+.wrap{max-width:1080px;margin:0 auto;padding:0 16px}
+.hidden{display:none!important}
+.glass{background:var(--glass);backdrop-filter:blur(22px) saturate(180%);-webkit-backdrop-filter:blur(22px) saturate(180%);border:1px solid var(--stroke);box-shadow:var(--shadow)}
+header{position:sticky;top:12px;z-index:50;margin:12px auto 0;max-width:1080px;padding:0 16px}
+.hbar{display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:20px;background:rgba(255,255,255,.55);backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);border:1px solid var(--stroke);box-shadow:var(--shadow)}
+.logo{display:flex;align-items:center;gap:10px;font-weight:900;letter-spacing:.6px;font-size:19px}
+.logo-mark{width:40px;height:40px;border-radius:13px;background:var(--grad);display:flex;align-items:center;justify-content:center;flex:none;box-shadow:0 8px 20px rgba(124,58,237,.35)}
+.logo-mark svg{width:21px;height:21px;fill:#fff}
+.hspace{flex:1}
+.balance-chip{display:flex;align-items:center;gap:7px;background:rgba(255,255,255,.7);border:1px solid var(--stroke);border-radius:99px;padding:7px 13px;font-weight:700;font-size:14px}
+.balance-chip b{color:var(--ok)}
+.btn{border:1px solid var(--stroke);background:rgba(255,255,255,.65);backdrop-filter:blur(14px);color:var(--text);border-radius:14px;padding:9px 16px;font-weight:800;font-size:14px;transition:.18s;box-shadow:0 6px 16px rgba(80,50,180,.08)}
+.btn:hover{transform:translateY(-1px);border-color:rgba(124,58,237,.4)}
+.btn.primary{background:var(--grad);border:none;color:#fff;box-shadow:0 10px 24px rgba(124,58,237,.32)}
+.btn.primary:hover{filter:brightness(1.08)}
+.btn.ok{background:rgba(10,157,92,.14);border-color:rgba(10,157,92,.35);color:var(--ok)}
+.btn.danger{background:rgba(225,29,72,.10);border-color:rgba(225,29,72,.3);color:var(--err)}
+.btn.small{padding:6px 11px;font-size:13px;border-radius:10px}
+.btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.user-chip{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.7);border:1px solid var(--stroke);border-radius:99px;padding:6px 12px 6px 7px;font-weight:700;font-size:14px}
+.avatar{width:28px;height:28px;border-radius:50%;background:var(--grad);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;color:#fff}
+.hero{margin:22px 0 6px;border-radius:28px;padding:32px 26px;position:relative;overflow:hidden;background:linear-gradient(125deg,rgba(124,58,237,.88),rgba(217,70,239,.78) 55%,rgba(6,182,212,.78));color:#fff;border:1px solid rgba(255,255,255,.5);box-shadow:0 24px 50px rgba(124,58,237,.30), inset 0 1px 0 rgba(255,255,255,.55)}
+.hero h1{font-size:30px;font-weight:900;letter-spacing:.3px;line-height:1.18}
+.hero h1 span{background:linear-gradient(90deg,#ffe27a,#fff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{color:rgba(255,255,255,.88);margin-top:8px;max-width:580px}
+.hero-badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.hbadge{border:1px solid rgba(255,255,255,.45);background:rgba(255,255,255,.18);backdrop-filter:blur(10px);border-radius:99px;padding:6px 13px;font-size:12.5px;font-weight:700;color:#fff}
+.toolbar{display:flex;gap:9px;flex-wrap:wrap;align-items:center;margin:20px 0 14px}
+.search{flex:1;min-width:190px;display:flex;align-items:center;gap:8px;background:var(--glass2);backdrop-filter:blur(18px);border:1px solid var(--stroke);border-radius:16px;padding:0 14px;box-shadow:var(--shadow)}
+.search input{flex:1;background:none;border:none;outline:none;padding:12px 0}
+.search svg{width:17px;height:17px;fill:var(--dim2);flex:none}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{border:1px solid var(--stroke);background:rgba(255,255,255,.6);backdrop-filter:blur(12px);color:var(--dim);border-radius:99px;padding:8px 15px;font-weight:800;font-size:13.5px}
+.chip.on{background:var(--grad);color:#fff;border-color:transparent;box-shadow:0 8px 18px rgba(124,58,237,.3)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;padding-bottom:26px}
+.pcard{background:var(--glass);backdrop-filter:blur(22px) saturate(180%);-webkit-backdrop-filter:blur(22px) saturate(180%);border:1px solid var(--stroke);border-radius:24px;overflow:hidden;display:flex;flex-direction:column;transition:.2s;box-shadow:var(--shadow)}
+.pcard:hover{transform:translateY(-4px);box-shadow:0 26px 48px rgba(80,50,180,.20)}
+.pimg{height:148px;background:linear-gradient(135deg,rgba(124,58,237,.85),rgba(6,182,212,.75));display:flex;align-items:center;justify-content:center;overflow:hidden}
+.pimg img{width:100%;height:100%;object-fit:cover}
+.pimg .pemoji{font-size:15px;font-weight:900;letter-spacing:2px;color:#fff;text-align:center;padding:0 10px}
+.pbody{padding:16px;display:flex;flex-direction:column;gap:7px;flex:1}
+.pcat{font-size:11px;font-weight:800;letter-spacing:1.6px;color:var(--acc)}
+.pname{font-weight:800;font-size:16.5px;line-height:1.3}
+.pdesc{color:var(--dim);font-size:13.5px;flex:1}
+.prow{display:flex;align-items:center;justify-content:space-between;margin-top:4px}
+.price{font-size:19.5px;font-weight:900;color:var(--ok)}
+.stock{font-size:12.5px;font-weight:700;color:var(--dim)} .stock.out{color:var(--err)} .stock.low{color:var(--warn)}
+.state-box{border:1.5px dashed rgba(124,58,237,.3);background:rgba(255,255,255,.45);backdrop-filter:blur(14px);border-radius:var(--r);padding:38px 18px;text-align:center;color:var(--dim);margin-bottom:26px}
+.state-box b{color:var(--text);display:block;font-size:16px;margin-bottom:5px}
+.spinner{width:30px;height:30px;border:3px solid rgba(124,58,237,.2);border-top-color:var(--acc);border-radius:50%;margin:0 auto 12px;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.mback{position:fixed;inset:0;background:rgba(30,20,70,.38);backdrop-filter:blur(8px);z-index:80;display:flex;align-items:flex-end;justify-content:center;padding:0}
+@media(min-width:640px){.mback{align-items:center;padding:18px}}
+.mbox{background:rgba(255,255,255,.82);backdrop-filter:blur(26px) saturate(180%);border:1px solid var(--stroke);box-shadow:0 30px 60px rgba(40,20,100,.25);border-radius:26px 26px 0 0;width:100%;max-width:470px;max-height:92vh;overflow-y:auto;padding:22px}
+@media(min-width:640px){.mbox{border-radius:26px}}
+.mbox h3{font-size:19px;font-weight:900;margin-bottom:4px}
+.mbox .sub{color:var(--dim);font-size:13.5px;margin-bottom:15px}
+.mclose{float:right;background:rgba(255,255,255,.7);border:1px solid var(--stroke);color:var(--text);width:32px;height:32px;border-radius:10px;font-size:15px}
+.field{margin-bottom:12px}
+.field label{display:block;font-size:12.5px;font-weight:800;color:var(--dim);margin-bottom:6px;letter-spacing:.4px}
+.field input,.field select,.field textarea{width:100%;background:rgba(255,255,255,.75);border:1px solid rgba(124,58,237,.18);border-radius:13px;padding:11px 13px;outline:none}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--acc);box-shadow:0 0 0 4px rgba(124,58,237,.12)}
+.field textarea{resize:vertical;min-height:74px}
+.tabs{display:flex;gap:7px;margin-bottom:16px}
+.tabs button{flex:1;padding:10px;border-radius:13px;border:1px solid var(--stroke);background:rgba(255,255,255,.6);color:var(--dim);font-weight:800}
+.tabs button.on{background:var(--grad);color:#fff;border-color:transparent}
+.msg{border-radius:13px;padding:10px 13px;font-size:13.5px;font-weight:600;margin-bottom:12px;display:none}
+.msg.err{display:block;background:rgba(225,29,72,.1);border:1px solid rgba(225,29,72,.3);color:#9f1239}
+.msg.ok{display:block;background:rgba(10,157,92,.12);border:1px solid rgba(10,157,92,.3);color:#065f46}
+.bank-box{background:var(--glass);backdrop-filter:blur(20px);border:1px solid var(--stroke);border-radius:20px;padding:16px;margin-bottom:13px;box-shadow:var(--shadow)}
+.bank-box .brow{display:flex;justify-content:space-between;gap:10px;padding:4px 0;font-size:14px}
+.bank-box .brow span{color:var(--dim)} .bank-box .brow b{font-weight:800;text-align:right}
+.code-big{font-size:21px;font-weight:900;letter-spacing:2px;color:var(--warn);text-align:center;padding:10px;background:rgba(255,255,255,.7);border:1px dashed rgba(217,119,6,.4);border-radius:12px;margin:8px 0}
+.copy-btn{width:100%;margin-top:4px}
+.note-out{background:rgba(10,157,92,.1);border:1px solid rgba(10,157,92,.3);border-radius:14px;padding:13px;word-break:break-all;font-weight:700;font-size:14.5px}
+.list{display:flex;flex-direction:column;gap:10px;padding-bottom:26px}
+.litem{background:var(--glass);backdrop-filter:blur(18px);border:1px solid var(--stroke);border-radius:18px;padding:13px 15px;display:flex;gap:11px;align-items:center;flex-wrap:wrap;box-shadow:var(--shadow)}
+.litem .grow{flex:1;min-width:150px} .litem .t{font-weight:800} .litem .s{color:var(--dim);font-size:13px}
+.pill{border-radius:99px;padding:4px 11px;font-size:12px;font-weight:800}
+.pill.pending{background:rgba(217,119,6,.15);color:var(--warn)} .pill.approved,.pill.active{background:rgba(10,157,92,.14);color:var(--ok)} .pill.rejected,.pill.banned{background:rgba(225,29,72,.12);color:var(--err)}
+.mono{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px;word-break:break-all}
+.sec-title{font-size:20px;font-weight:900;margin:22px 0 13px;display:flex;align-items:center;gap:10px}
+.sec-title .btn{margin-left:auto}
+.sec-title::before{content:"";width:5px;height:22px;border-radius:3px;background:var(--grad);flex:none}
+.viewnav{display:flex;gap:8px;margin:16px 0 6px;flex-wrap:wrap;background:rgba(255,255,255,.5);backdrop-filter:blur(18px);border:1px solid var(--stroke);border-radius:18px;padding:8px;box-shadow:var(--shadow);width:fit-content;max-width:100%}
+.viewnav button{border:1px solid transparent;background:transparent;color:var(--dim);border-radius:12px;padding:9px 15px;font-weight:800;font-size:14px}
+.viewnav button.on{background:var(--grad);color:#fff;box-shadow:0 8px 18px rgba(124,58,237,.28)}
+.astats{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;margin-bottom:18px}
+.astat{background:var(--glass);backdrop-filter:blur(20px);border:1px solid var(--stroke);border-radius:20px;padding:16px;box-shadow:var(--shadow)}
+.astat .n{font-size:22px;font-weight:900} .astat .l{color:var(--dim);font-size:12.5px;font-weight:800;letter-spacing:.5px}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th,td{text-align:left;padding:10px 9px;border-bottom:1px solid rgba(124,58,237,.1);vertical-align:top}
+th{color:var(--dim);font-size:12px;letter-spacing:.6px}
+.tablebox{overflow-x:auto;background:var(--glass);backdrop-filter:blur(20px);border:1px solid var(--stroke);border-radius:20px;margin-bottom:20px;box-shadow:var(--shadow)}
+footer{padding:22px 0 90px;color:var(--dim2);font-size:13px;text-align:center}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);background:rgba(22,18,43,.92);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.25);color:#fff;border-radius:14px;padding:11px 18px;font-weight:700;font-size:14px;opacity:0;pointer-events:none;transition:.25s;z-index:200;max-width:92vw;text-align:center;box-shadow:0 16px 36px rgba(0,0,0,.25)}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.setup-banner{background:rgba(217,119,6,.14);border:1px solid rgba(217,119,6,.35);color:#92400e;border-radius:16px;padding:14px 16px;margin-top:18px;font-size:14px}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:16px 0 2px}
+.step{background:var(--glass);backdrop-filter:blur(20px);border:1px solid var(--stroke);border-radius:20px;padding:14px;display:flex;gap:11px;align-items:flex-start;box-shadow:var(--shadow)}
+.step .n{width:29px;height:29px;border-radius:50%;background:var(--grad);color:#fff;font-weight:900;display:flex;align-items:center;justify-content:center;flex:none;font-size:14px}
+.step .t{font-weight:800;font-size:14.5px} .step .s{color:var(--dim);font-size:12.5px;line-height:1.4}
+@media(max-width:560px){.steps{grid-template-columns:1fr}.hero h1{font-size:25px}}
+.qr-box{background:#fff;border-radius:18px;padding:14px;text-align:center;margin-bottom:13px;box-shadow:var(--shadow)}
+.qr-box img{width:230px;max-width:82%;height:auto;display:block;margin:0 auto}
+.qr-box .cap{color:#444;font-size:12.5px;font-weight:700;margin-top:9px}
+.buybar{display:flex;gap:9px;align-items:center;background:var(--glass);border:1px solid var(--stroke);border-radius:16px;padding:11px 14px;margin-bottom:13px}
+.buybar .grow{flex:1}
+.bottomnav{position:fixed;left:50%;transform:translateX(-50%);bottom:14px;z-index:60;display:flex;gap:4px;background:rgba(255,255,255,.62);backdrop-filter:blur(24px) saturate(180%);border:1px solid var(--stroke);border-radius:99px;padding:6px;box-shadow:0 18px 40px rgba(60,30,140,.22)}
+.bottomnav a{padding:9px 18px;border-radius:99px;font-weight:800;font-size:14px;color:var(--dim)}
+.bottomnav a.on{background:var(--grad);color:#fff}
+</style>
+</head>
+
+</head>
+<body>
+
+<header>
+  <div class="wrap hbar">
+    <div class="logo">
+      <div class="logo-mark"><svg viewBox="0 0 24 24"><path d="M13 2 4.5 13.5H11L9.5 22 19 10h-6.5L13 2z"/></svg></div>
+      <span id="logoName">SHOP NOVA</span>
+    </div>
+    <div class="hspace"></div>
+    <div id="hdrAnon">
+      <button class="btn" onclick="openAuth('login')">Đăng nhập</button>
+      <button class="btn primary" onclick="openAuth('register')">Đăng ký</button>
+    </div>
+    <div id="hdrUser" class="hidden" style="display:flex;gap:8px;align-items:center">
+      <div class="balance-chip">Ví: <b id="hdrBalance">0đ</b></div>
+      <div class="user-chip"><div class="avatar" id="hdrAvatar">?</div><span id="hdrUsername"></span></div>
+      <button class="btn small" onclick="logout()">Thoát</button>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div id="setupBanner" class="setup-banner hidden">Shop <b>chưa nối backend</b>: cần điền <b>SUPABASE_URL</b> và <b>SUPABASE_ANON_KEY</b> ở đầu file này (hoặc gửi 2 thông tin đó cho Muse để nối sẵn).</div>
+
+  <!-- ============ STOREFRONT ============ -->
+  <main id="viewShop" class="hidden">
+    <section class="hero">
+      <h1>Mua key &amp; file <span>giao tự động</span><br>trong vài giây</h1>
+      <p>Nạp tiền vào ví, bấm mua — hệ thống tự giao hàng ngay sau khi thanh toán. Dữ liệu chạy trên backend Supabase thật, dùng chung cho mọi khách.</p>
+      <div class="hero-badges">
+        <div class="hbadge">Giao hàng <b>tự động 24/7</b></div>
+        <div class="hbadge">Nạp từ <b>10.000đ</b></div>
+        <div class="hbadge" id="heroSupport">Hỗ trợ <b>Zalo 0336287114</b></div>
+      </div>
+    </section>
+
+    <div class="steps">
+      <div class="step"><div class="n">1</div><div><div class="t">Đăng nhập</div><div class="s">Tạo tài khoản miễn phí trong 10 giây</div></div></div>
+      <div class="step"><div class="n">2</div><div><div class="t">Nạp tiền vào ví</div><div class="s">Quét QR ngân hàng, ghi đúng mã nạp</div></div></div>
+      <div class="step"><div class="n">3</div><div><div class="t">Mua &amp; nhận ngay</div><div class="s">Hệ thống tự giao key/file sau khi mua</div></div></div>
+    </div>
+
+    <div class="viewnav" id="shopNav">
+      <button class="on" data-nav="products" onclick="showShopTab('products')">Sản phẩm</button>
+      <button data-nav="wallet" onclick="showShopTab('wallet')">Ví &amp; Nạp tiền</button>
+      <button data-nav="orders" onclick="showShopTab('orders')">Đơn của tôi</button>
+    </div>
+
+    <section id="tabProducts">
+      <div class="toolbar">
+        <div class="search">
+          <svg viewBox="0 0 24 24"><path d="M10 2a8 8 0 1 0 4.9 14.3l5 5 1.4-1.4-5-5A8 8 0 0 0 10 2zm0 2a6 6 0 1 1 0 12 6 6 0 0 1 0-12z"/></svg>
+          <input id="searchInput" type="text" placeholder="Tìm sản phẩm..." oninput="renderProducts()">
+        </div>
+        <div class="chips" id="catChips"></div>
+      </div>
+      <div id="productArea">
+        <div class="state-box"><div class="spinner"></div><b>Đang tải sản phẩm...</b></div>
+      </div>
+    </section>
+
+    <section id="tabWallet" class="hidden">
+      <div class="sec-title">Ví của tôi</div>
+      <div id="walletArea"></div>
+    </section>
+
+    <section id="tabOrders" class="hidden">
+      <div class="sec-title">Đơn hàng của tôi</div>
+      <div id="ordersArea"></div>
+    </section>
+  </main>
+
+  <!-- ============ ADMIN ============ -->
+  <main id="viewAdmin">
+    <div class="sec-title">Trang quản trị <button class="btn small" onclick="location.href='index.html'">← Về shop</button></div>
+    <div id="adminLoginBox">
+      <div class="mbox" style="max-width:440px;margin:0 auto;border-radius:20px">
+        <h3 id="adminLoginTitle">Đăng nhập Admin</h3>
+        <p class="sub" id="adminLoginSub">Nhập mật khẩu quản trị để tiếp tục.</p>
+        <div class="msg" id="adminLoginMsg"></div>
+        <div class="field"><label>MẬT KHẨU ADMIN</label><input id="adminPass" type="password" placeholder="••••••••" autocomplete="current-password"></div>
+        <button class="btn primary" style="width:100%" id="adminLoginBtn" onclick="adminLogin()">Vào quản trị</button>
+      </div>
+    </div>
+    <div id="adminPanel" class="hidden">
+      <div class="viewnav" id="adminNav">
+        <button class="on" data-anav="stats" onclick="showAdminTab('stats')">Tổng quan</button>
+        <button data-anav="products" onclick="showAdminTab('products')">Sản phẩm</button>
+        <button data-anav="deposits" onclick="showAdminTab('deposits')">Duyệt nạp</button>
+        <button data-anav="users" onclick="showAdminTab('users')">Khách hàng</button>
+        <button data-anav="orders" onclick="showAdminTab('orders')">Đơn hàng</button>
+        <button data-anav="settings" onclick="showAdminTab('settings')">Cài đặt</button>
+        <button onclick="adminLogout()">Đăng xuất admin</button>
+      </div>
+      <div id="adminArea"></div>
+    </div>
+  </main>
+
+  <footer>
+    <div id="footText">SHOP NOVA — Hệ thống bán hàng tự động</div>
+    <div style="margin-top:6px"><a href="#" onclick="showView('admin');return false">Quản trị</a></div>
+  </footer>
+</div>
+
+<!-- Auth modal -->
+<div class="mback hidden" id="authModal">
+  <div class="mbox">
+    <button class="mclose" onclick="closeModal('authModal')">✕</button>
+    <h3 id="authTitle">Đăng nhập</h3>
+    <p class="sub">Tài khoản dùng để giữ ví và nhận hàng tự động.</p>
+    <div class="tabs">
+      <button id="tabLogin" class="on" onclick="switchAuth('login')">Đăng nhập</button>
+      <button id="tabRegister" onclick="switchAuth('register')">Đăng ký</button>
+    </div>
+    <div class="msg" id="authMsg"></div>
+    <div class="field"><label>TÊN ĐĂNG NHẬP</label><input id="authUser" type="text" autocomplete="username" placeholder="vd: khach123"></div>
+    <div class="field"><label>MẬT KHẨU</label><input id="authPass" type="password" autocomplete="current-password" placeholder="Tối thiểu 6 ký tự"></div>
+    <button class="btn primary" style="width:100%" id="authBtn" onclick="submitAuth()">Đăng nhập</button>
+  </div>
+</div>
+
+<!-- Buy modal -->
+<div class="mback hidden" id="buyModal">
+  <div class="mbox">
+    <button class="mclose" onclick="closeModal('buyModal')">✕</button>
+    <h3 id="buyName">Sản phẩm</h3>
+    <p class="sub" id="buyDesc"></p>
+    <div class="msg" id="buyMsg"></div>
+    <div id="buyBody"></div>
+  </div>
+</div>
+
+<!-- Deposit modal -->
+<div class="mback hidden" id="depositModal">
+  <div class="mbox">
+    <button class="mclose" onclick="closeModal('depositModal')">✕</button>
+    <h3>Nạp tiền vào ví</h3>
+    <p class="sub">Chuyển khoản đúng số tiền và đúng nội dung mã nạp — admin duyệt là tiền vào ví.</p>
+    <div class="msg" id="depositMsg"></div>
+    <div id="depositBody"></div>
+  </div>
+</div>
+
+<nav class="bottomnav"><a href="index.html">Shop</a><a href="admin.html" class="on">Admin</a></nav>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ================================================================
+   CẤU HÌNH BACKEND — điền 2 giá trị của project Supabase vào đây.
+   Lấy tại: Supabase Dashboard > Project Settings > API
+   (Project URL + anon public key). Xem HUONG-DAN.md.
+================================================================ */
+const SUPABASE_URL = "https://rktjulkysfgyuxbazmne.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable_0T6i2OwL4JNiRNW-Mm_m8w_MGe5rHCW";
+
+/* ---------------- Trạng thái ---------------- */
+const LS_SESSION = "NOVA_SESSION";
+const LS_ADMIN = "NOVA_ADMIN_TOKEN";
+let sessionToken = localStorage.getItem(LS_SESSION) || "";
+let adminToken = localStorage.getItem(LS_ADMIN) || "";
+let me = null;               // {username, balance}
+let shopConfig = {};         // từ get_config
+let products = [];
+let activeCat = "ALL";
+let authMode = "login";
+let buyTarget = null;
+
+/* ---------------- Tiện ích ---------------- */
+const $ = id => document.getElementById(id);
+const fmt = n => (Number(n) || 0).toLocaleString("vi-VN") + "đ";
+const fmtDate = s => { try { return new Date(s).toLocaleString("vi-VN"); } catch (e) { return s || ""; } };
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+function toast(text) {
+  const t = $("toast"); t.textContent = text; t.classList.add("show");
+  clearTimeout(t._h); t._h = setTimeout(() => t.classList.remove("show"), 2600);
+}
+function setMsg(id, text, ok) {
+  const m = $(id); if (!m) return;
+  m.textContent = text || ""; m.className = "msg" + (text ? (ok ? " ok" : " err") : "");
+}
+function copyText(text, label) {
+  const done = () => toast("Đã copy " + (label || ""));
+  if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(done).catch(() => fallbackCopy(text, done));
+  else fallbackCopy(text, done);
+}
+function fallbackCopy(text, done) {
+  const ta = document.createElement("textarea");
+  ta.value = text; ta.style.position = "fixed"; ta.style.opacity = "0";
+  document.body.appendChild(ta); ta.select();
+  try { document.execCommand("copy"); done(); } catch (e) {}
+  document.body.removeChild(ta);
+}
+
+/* ---------------- Gọi backend (Supabase RPC) ---------------- */
+async function rpc(fn, params) {
+  if (!SUPABASE_URL || !SUPABASE_ANON_KEY) throw new Error("NOT_CONFIGURED");
+  let res;
+  try {
+    res = await fetch(SUPABASE_URL.replace(/\/$/, "") + "/rest/v1/rpc/" + fn, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "apikey": SUPABASE_ANON_KEY,
+        "Authorization": "Bearer " + SUPABASE_ANON_KEY
+      },
+      body: JSON.stringify(params || {})
+    });
+  } catch (e) { throw new Error("NETWORK"); }
+  let data = null;
+  try { data = await res.json(); } catch (e) {}
+  if (!res.ok) throw new Error((data && (data.message || data.hint)) || ("HTTP " + res.status));
+  return data;
+}
+function errText(e) {
+  if (e && e.message === "NOT_CONFIGURED") return "Shop chưa nối backend Supabase.";
+  if (e && e.message === "NETWORK") return "Không kết nối được server. Kiểm tra mạng rồi thử lại.";
+  return (e && e.message) || "Có lỗi xảy ra.";
+}
+
+/* ---------------- Khởi động ---------------- */
+document.addEventListener("DOMContentLoaded", init);
+async function init() {
+  if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
+    $("setupBanner").classList.remove("hidden");
+    $("productArea").innerHTML = '<div class="state-box"><b>Chưa có dữ liệu</b>Shop cần nối Supabase trước khi bán. Xem HUONG-DAN.md.</div>';
+    return;
+  }
+  await loadConfig();
+  await loadProducts();
+  if (sessionToken) await refreshMe(true);
+  renderHeader(); initAdmin();
+}
+
+async function loadConfig() {
+  try {
+    shopConfig = await rpc("get_config", {});
+    const name = shopConfig.shop_name || "SHOP NOVA";
+    document.title = name + " — Shop Full-Stack";
+    $("logoName").textContent = name;
+    $("footText").textContent = name + " — Hệ thống bán hàng tự động";
+    if (shopConfig.support_zalo) $("heroSupport").innerHTML = "Hỗ trợ <b>Zalo " + esc(shopConfig.support_zalo) + "</b>";
+  } catch (e) { /* giữ mặc định */ }
+}
+
+/* ---------------- Sản phẩm ---------------- */
+async function loadProducts() {
+  try {
+    products = await rpc("list_products", {});
+    renderCatChips();
+    renderProducts();
+  } catch (e) {
+    $("productArea").innerHTML = '<div class="state-box"><b>Tải sản phẩm thất bại</b>' + esc(errText(e)) + '<br><br><button class="btn" onclick="loadProducts()">Thử lại</button></div>';
+  }
+}
+function renderCatChips() {
+  // Danh mục TỰ SINH từ dữ liệu sản phẩm — thêm danh mục mới trong admin là tự hiện.
+  const cats = [...new Set(products.map(p => (p.category || "KHÁC").toUpperCase()))];
+  let h = '<button class="chip' + (activeCat === "ALL" ? " on" : "") + '" onclick="setCat(\'ALL\')">Tất cả</button>';
+  for (const c of cats) {
+    h += '<button class="chip' + (activeCat === c ? " on" : "") + '" onclick="setCat(\'' + esc(c) + '\')">' + esc(c) + "</button>";
+  }
+  $("catChips").innerHTML = h;
+}
+function setCat(c) { activeCat = c; renderCatChips(); renderProducts(); }
+function stockHtml(p) {
+  const r = Number(p.remaining) || 0;
+  if (r <= 0) return '<span class="stock out">Hết hàng</span>';
+  if (r <= 3) return '<span class="stock low">Còn ' + r + "</span>";
+  return '<span class="stock">Còn ' + r + "</span>";
+}
+function renderProducts() {
+  const q = ($("searchInput").value || "").trim().toLowerCase();
+  const list = products.filter(p =>
+    (activeCat === "ALL" || (p.category || "").toUpperCase() === activeCat) &&
+    (!q || (p.name + " " + (p.description || "")).toLowerCase().includes(q)));
+  if (!list.length) {
+    $("productArea").innerHTML = '<div class="state-box"><b>Không có sản phẩm nào</b>Thử đổi danh mục hoặc từ khoá tìm kiếm.</div>';
+    return;
+  }
+  let h = '<div class="grid">';
+  for (const p of list) {
+    const img = p.image_url
+      ? '<img src="' + esc(p.image_url) + '" alt="" loading="lazy" onerror="this.parentNode.innerHTML=\'<div class=&quot;pemoji&quot;>' + esc((p.category || "SHOP").toUpperCase()) + '</div>\'">'
+      : '<div class="pemoji">' + esc((p.category || "SHOP").toUpperCase()) + "</div>";
+    h += '<article class="pcard"><div class="pimg">' + img + '</div><div class="pbody">' +
+      '<div class="pcat">' + esc((p.category || "").toUpperCase()) + '</div>' +
+      '<div class="pname">' + esc(p.name) + '</div>' +
+      '<div class="pdesc">' + esc(p.description || "") + '</div>' +
+      '<div class="prow"><div class="price">' + fmt(p.price) + '</div>' + stockHtml(p) + '</div>' +
+      '<button class="btn primary" ' + (Number(p.remaining) > 0 ? "" : "disabled") + ' onclick="openBuy(\'' + p.id + '\')">' +
+      (Number(p.remaining) > 0 ? "Mua ngay" : "Hết hàng") + "</button>" +
+      "</div></article>";
+  }
+  $("productArea").innerHTML = h + "</div>";
+}
+
+/* ---------------- Tài khoản ---------------- */
+function renderHeader() {
+  if (me) {
+    $("hdrAnon").classList.add("hidden");
+    $("hdrUser").classList.remove("hidden");
+    $("hdrBalance").textContent = fmt(me.balance);
+    $("hdrUsername").textContent = me.username;
+    $("hdrAvatar").textContent = (me.username || "?").slice(0, 1).toUpperCase();
+  } else {
+    $("hdrAnon").classList.remove("hidden");
+    $("hdrUser").classList.add("hidden");
+  }
+}
+async function refreshMe(silent) {
+  try {
+    const r = await rpc("get_me", { p_token: sessionToken });
+    if (r && r.success) { me = r.user; }
+    else { me = null; sessionToken = ""; localStorage.removeItem(LS_SESSION); }
+  } catch (e) { if (!silent) toast(errText(e)); }
+  renderHeader(); initAdmin();
+}
+function openAuth(mode) {
+  switchAuth(mode || "login");
+  setMsg("authMsg", "");
+  $("authModal").classList.remove("hidden");
+}
+function switchAuth(mode) {
+  authMode = mode;
+  $("tabLogin").classList.toggle("on", mode === "login");
+  $("tabRegister").classList.toggle("on", mode === "register");
+  $("authTitle").textContent = mode === "login" ? "Đăng nhập" : "Đăng ký tài khoản";
+  $("authBtn").textContent = mode === "login" ? "Đăng nhập" : "Đăng ký";
+  $("authPass").setAttribute("autocomplete", mode === "login" ? "current-password" : "new-password");
+}
+async function submitAuth() {
+  const u = $("authUser").value.trim(), p = $("authPass").value;
+  if (!u || !p) { setMsg("authMsg", "Nhập đủ tên đăng nhập và mật khẩu."); return; }
+  const btn = $("authBtn"); btn.disabled = true; btn.textContent = "Đang xử lý...";
+  try {
+    if (authMode === "register") {
+      const r = await rpc("register_user", { p_username: u, p_password: p });
+      if (!r.success) { setMsg("authMsg", r.error || "Đăng ký thất bại"); return; }
+      setMsg("authMsg", "Đăng ký thành công — đang đăng nhập...", true);
+    }
+    const r = await rpc("login_user", { p_username: u, p_password: p });
+    if (!r.success) { setMsg("authMsg", r.error || "Đăng nhập thất bại"); return; }
+    sessionToken = r.session_token; localStorage.setItem(LS_SESSION, sessionToken);
+    me = r.user; renderHeader();
+    closeModal("authModal");
+    toast("Xin chào, " + me.username);
+    showShopTab("products");
+  } catch (e) { setMsg("authMsg", errText(e)); }
+  finally { btn.disabled = false; btn.textContent = authMode === "login" ? "Đăng nhập" : "Đăng ký"; }
+}
+async function logout() {
+  try { await rpc("logout_user", { p_token: sessionToken }); } catch (e) {}
+  sessionToken = ""; me = null; localStorage.removeItem(LS_SESSION);
+  renderHeader(); showShopTab("products"); toast("Đã đăng xuất");
+}
+function requireLogin() {
+  if (me) return true;
+  openAuth("login"); toast("Đăng nhập để tiếp tục");
+  return false;
+}
+
+/* ---------------- Điều hướng ---------------- */
+function closeModal(id) { $(id).classList.add("hidden"); }
+document.addEventListener("click", e => {
+  if (e.target.classList && e.target.classList.contains("mback")) e.target.classList.add("hidden");
+});
+function showView(v) {
+  $("viewShop").classList.toggle("hidden", v !== "shop");
+  $("viewAdmin").classList.toggle("hidden", v !== "admin");
+  window.scrollTo({ top: 0 });
+  if (v === "admin") initAdmin();
+}
+function showShopTab(tab) {
+  showView("shop");
+  document.querySelectorAll("#shopNav button").forEach(b => b.classList.toggle("on", b.dataset.nav === tab));
+  $("tabProducts").classList.toggle("hidden", tab !== "products");
+  $("tabWallet").classList.toggle("hidden", tab !== "wallet");
+  $("tabOrders").classList.toggle("hidden", tab !== "orders");
+  if (tab === "wallet") renderWallet();
+  if (tab === "orders") renderOrders();
+}
+</script>
+
+<script>
+/* ---------------- Mua hàng ---------------- */
+function openBuy(id) {
+  if (!requireLogin()) return;
+  buyTarget = products.find(p => p.id === id);
+  if (!buyTarget) return;
+  setMsg("buyMsg", "");
+  $("buyName").textContent = buyTarget.name;
+  $("buyDesc").textContent = buyTarget.description || "";
+  $("buyBody").innerHTML =
+    '<div class="bank-box">' +
+    '<div class="brow"><span>Giá</span><b>' + fmt(buyTarget.price) + '</b></div>' +
+    '<div class="brow"><span>Số dư ví</span><b>' + fmt(me.balance) + '</b></div>' +
+    '<div class="brow"><span>Còn trong kho</span><b>' + (Number(buyTarget.remaining) || 0) + '</b></div>' +
+    '</div>' +
+    (Number(me.balance) >= Number(buyTarget.price)
+      ? '<button class="btn primary" style="width:100%" id="buyBtn" onclick="doBuy()">Xác nhận mua — giao ngay</button>'
+      : '<p class="sub">Số dư không đủ. Nạp thêm để mua sản phẩm này.</p><button class="btn primary" style="width:100%" onclick="closeModal(\'buyModal\');showShopTab(\'wallet\')">Đi nạp tiền</button>');
+  $("buyModal").classList.remove("hidden");
+}
+async function doBuy() {
+  const btn = $("buyBtn"); btn.disabled = true; btn.textContent = "Đang xử lý...";
+  try {
+    const r = await rpc("buy_product", { p_token: sessionToken, p_product_id: buyTarget.id });
+    if (!r.success) { setMsg("buyMsg", r.error || "Mua thất bại"); return; }
+    me.balance = r.balance; renderHeader();
+    $("buyBody").innerHTML =
+      '<p class="sub" style="color:var(--ok);font-weight:700">Mua thành công! Nội dung giao hàng của bạn:</p>' +
+      '<div class="note-out">' + esc(r.delivered) + '</div>' +
+      '<button class="btn copy-btn" onclick="copyText(\'' + esc(String(r.delivered).replace(/'/g, "\\'")) + '\',\'nội dung giao hàng\')">Copy nội dung</button>' +
+      '<p class="sub" style="margin-top:10px">Nội dung này cũng được lưu trong mục Đơn của tôi.</p>';
+    loadProducts();
+  } catch (e) { setMsg("buyMsg", errText(e)); }
+  finally { if ($("buyBtn")) { $("buyBtn").disabled = false; $("buyBtn").textContent = "Xác nhận mua — giao ngay"; } }
+}
+
+/* ---------------- Ví & nạp ---------------- */
+async function renderWallet() {
+  const area = $("walletArea");
+  if (!me) {
+    area.innerHTML = '<div class="state-box"><b>Chưa đăng nhập</b>Đăng nhập để xem ví và nạp tiền.<br><br><button class="btn primary" onclick="openAuth(\'login\')">Đăng nhập</button></div>';
+    return;
+  }
+  area.innerHTML =
+    '<div class="astats">' +
+    '<div class="astat"><div class="n" style="color:var(--ok)">' + fmt(me.balance) + '</div><div class="l">SỐ DƯ VÍ</div></div>' +
+    '<div class="astat"><div class="n">' + esc(me.username) + '</div><div class="l">TÀI KHOẢN</div></div>' +
+    '</div>' +
+    '<div class="bank-box"><b>Nạp tiền</b><p class="sub" style="margin:6px 0 10px">Nhập số tiền, hệ thống tạo mã nạp. Chuyển khoản đúng mã, admin duyệt là tiền vào ví.</p>' +
+    '<div class="field"><label>SỐ TIỀN (TỐI THIỂU 10.000đ)</label><input id="depAmount" type="number" min="10000" step="1000" placeholder="vd: 50000"></div>' +
+    '<button class="btn primary" onclick="createDeposit()">Tạo mã nạp</button></div>' +
+    '<div class="sec-title" style="font-size:16px">Lịch sử nạp</div><div id="depHistory"><div class="state-box"><div class="spinner"></div><b>Đang tải...</b></div></div>';
+  loadDepositHistory();
+}
+async function createDeposit() {
+  const amount = parseInt($("depAmount").value, 10);
+  if (!amount || amount < 10000) { toast("Số tiền nạp tối thiểu 10.000đ"); return; }
+  try {
+    const r = await rpc("create_deposit", { p_token: sessionToken, p_amount: amount });
+    if (!r.success) { toast(r.error || "Tạo mã nạp thất bại"); return; }
+    setMsg("depositMsg", "");
+    const qrUrl = "https://img.vietqr.io/image/" + encodeURIComponent(shopConfig.bank_bin || "970422") + "-" +
+      encodeURIComponent(shopConfig.bank_account || "") + "-compact2.png?amount=" + r.amount +
+      "&addInfo=" + encodeURIComponent(r.code) + "&accountName=" + encodeURIComponent(shopConfig.bank_holder || "");
+    $("depositBody").innerHTML =
+      '<div class="qr-box"><img src="' + qrUrl + '" alt="QR nạp tiền" onerror="this.parentNode.style.display=\'none\'">' +
+      '<div class="cap">Mở app ngân hàng quét mã này — số tiền &amp; nội dung đã điền sẵn</div></div>' +
+      '<div class="bank-box">' +
+      '<div class="brow"><span>Ngân hàng</span><b>' + esc(shopConfig.bank_name || "TPBank") + '</b></div>' +
+      '<div class="brow"><span>Số tài khoản</span><b>' + esc(shopConfig.bank_account || "") + '</b></div>' +
+      '<div class="brow"><span>Chủ tài khoản</span><b>' + esc(shopConfig.bank_holder || "") + '</b></div>' +
+      '<div class="brow"><span>Số tiền</span><b>' + fmt(r.amount) + '</b></div>' +
+      '</div>' +
+      '<label style="font-size:12.5px;font-weight:700;color:var(--dim)">NỘI DUNG CHUYỂN KHOẢN (GHI ĐÚNG MÃ NÀY)</label>' +
+      '<div class="code-big">' + esc(r.code) + '</div>' +
+      '<button class="btn copy-btn" onclick="copyText(\'' + esc(r.code) + '\',\'mã nạp\')">Copy mã nạp</button>' +
+      '<button class="btn copy-btn" style="margin-top:8px" onclick="copyText(\'' + esc(shopConfig.bank_account || "") + '\',\'số tài khoản\')">Copy số tài khoản</button>' +
+      '<p class="sub" style="margin-top:12px">Sau khi chuyển khoản, chờ admin duyệt (thường trong ít phút). Trạng thái xem ở mục Ví &amp; Nạp tiền.</p>';
+    $("depositModal").classList.remove("hidden");
+    loadDepositHistory();
+  } catch (e) { toast(errText(e)); }
+}
+async function loadDepositHistory() {
+  const box = $("depHistory"); if (!box) return;
+  try {
+    const r = await rpc("my_deposits", { p_token: sessionToken });
+    if (!r.success) { box.innerHTML = '<div class="state-box"><b>Không tải được</b>' + esc(r.error || "") + "</div>"; return; }
+    if (!r.deposits.length) { box.innerHTML = '<div class="state-box"><b>Chưa có lần nạp nào</b>Tạo mã nạp đầu tiên ở phía trên.</div>'; return; }
+    box.innerHTML = '<div class="list">' + r.deposits.map(d =>
+      '<div class="litem"><div class="grow"><div class="t mono">' + esc(d.code) + '</div><div class="s">' + fmtDate(d.created_at) + '</div></div>' +
+      '<b>' + fmt(d.amount) + '</b><span class="pill ' + esc(d.status) + '">' +
+      (d.status === "pending" ? "Chờ duyệt" : d.status === "approved" ? "Đã cộng" : "Từ chối") + "</span></div>").join("") + "</div>";
+  } catch (e) { box.innerHTML = '<div class="state-box"><b>Không tải được</b>' + esc(errText(e)) + "</div>"; }
+}
+
+/* ---------------- Đơn của tôi ---------------- */
+async function renderOrders() {
+  const area = $("ordersArea");
+  if (!me) {
+    area.innerHTML = '<div class="state-box"><b>Chưa đăng nhập</b>Đăng nhập để xem đơn hàng.<br><br><button class="btn primary" onclick="openAuth(\'login\')">Đăng nhập</button></div>';
+    return;
+  }
+  area.innerHTML = '<div class="state-box"><div class="spinner"></div><b>Đang tải đơn...</b></div>';
+  try {
+    const r = await rpc("my_orders", { p_token: sessionToken });
+    if (!r.success) { area.innerHTML = '<div class="state-box"><b>Không tải được</b>' + esc(r.error || "") + "</div>"; return; }
+    if (!r.orders.length) { area.innerHTML = '<div class="state-box"><b>Chưa có đơn nào</b>Mua sản phẩm đầu tiên ở mục Sản phẩm nhé.</div>'; return; }
+    area.innerHTML = '<div class="list">' + r.orders.map(o =>
+      '<div class="litem"><div class="grow"><div class="t">' + esc(o.product_name) + '</div>' +
+      '<div class="s">' + fmtDate(o.created_at) + ' • ' + fmt(o.price) + '</div>' +
+      '<div class="mono" style="margin-top:5px">' + esc(o.note_content) + '</div></div>' +
+      '<button class="btn small" onclick="copyText(this.closest(\'.litem\').querySelector(\'.mono\').textContent,\'nội dung\')">Copy</button></div>').join("") + "</div>";
+  } catch (e) { area.innerHTML = '<div class="state-box"><b>Không tải được</b>' + esc(errText(e)) + "</div>"; }
+}
+
+/* ---------------- ADMIN ---------------- */
+let adminTab = "stats";
+function initAdmin() {
+  if (adminToken) { $("adminLoginBox").classList.add("hidden"); $("adminPanel").classList.remove("hidden"); showAdminTab(adminTab); }
+  else { $("adminLoginBox").classList.remove("hidden"); $("adminPanel").classList.add("hidden"); checkAdminSetup(); }
+}
+async function checkAdminSetup() {
+  try {
+    const r = await rpc("admin_login", { p_admin_token: "" });
+    if (r && r.need_setup) {
+      $("adminLoginTitle").textContent = "Đặt mật khẩu Admin lần đầu";
+      $("adminLoginSub").textContent = "Shop chưa có mật khẩu quản trị. Đặt mật khẩu tối thiểu 8 ký tự — nhớ kỹ, đây là chìa khoá quản trị shop.";
+      $("adminLoginBtn").textContent = "Đặt mật khẩu & vào quản trị";
+    }
+  } catch (e) {}
+}
+async function adminLogin() {
+  const pass = $("adminPass").value;
+  if (!pass) { setMsg("adminLoginMsg", "Nhập mật khẩu admin."); return; }
+  const btn = $("adminLoginBtn"); btn.disabled = true;
+  try {
+    let r = await rpc("admin_login", { p_admin_token: pass });
+    if (r && r.need_setup) {
+      r = await rpc("admin_setup", { p_new_token: pass });
+      if (!r.success) { setMsg("adminLoginMsg", r.error || "Đặt mật khẩu thất bại"); return; }
+    } else if (!r.success) { setMsg("adminLoginMsg", r.error || "Sai mật khẩu"); return; }
+    adminToken = pass; localStorage.setItem(LS_ADMIN, pass);
+    $("adminLoginBox").classList.add("hidden"); $("adminPanel").classList.remove("hidden");
+    showAdminTab("stats"); toast("Đã vào quản trị");
+  } catch (e) { setMsg("adminLoginMsg", errText(e)); }
+  finally { btn.disabled = false; }
+}
+function adminLogout() {
+  adminToken = ""; localStorage.removeItem(LS_ADMIN);
+  $("adminPanel").classList.add("hidden"); $("adminLoginBox").classList.remove("hidden");
+  $("adminPass").value = "";
+}
+function showAdminTab(tab) {
+  adminTab = tab;
+  document.querySelectorAll("#adminNav button[data-anav]").forEach(b => b.classList.toggle("on", b.dataset.anav === tab));
+  ({ stats: adminStats, products: adminProducts, deposits: adminDeposits, users: adminUsers, orders: adminOrders, settings: adminSettings })[tab]();
+}
+function adminLoading() { $("adminArea").innerHTML = '<div class="state-box"><div class="spinner"></div><b>Đang tải...</b></div>'; }
+function adminFail(e) { $("adminArea").innerHTML = '<div class="state-box"><b>Không tải được</b>' + esc(errText(e)) + "</div>"; }
+
+async function adminStats() {
+  adminLoading();
+  try {
+    const r = await rpc("admin_stats", { p_admin_token: adminToken });
+    if (!r.success) { adminFail(new Error(r.error)); return; }
+    $("adminArea").innerHTML =
+      '<div class="astats">' +
+      '<div class="astat"><div class="n">' + fmt(r.revenue) + '</div><div class="l">DOANH THU</div></div>' +
+      '<div class="astat"><div class="n">' + r.orders + '</div><div class="l">ĐƠN HÀNG</div></div>' +
+      '<div class="astat"><div class="n">' + r.users + '</div><div class="l">KHÁCH HÀNG</div></div>' +
+      '<div class="astat"><div class="n">' + r.products + '</div><div class="l">SẢN PHẨM</div></div>' +
+      '<div class="astat"><div class="n" style="color:var(--warn)">' + r.pending_deposits + '</div><div class="l">NẠP CHỜ DUYỆT</div></div>' +
+      '<div class="astat"><div class="n">' + r.stock_left + '</div><div class="l">HÀNG CÒN TRONG KHO</div></div>' +
+      "</div>" +
+      (Number(r.pending_deposits) > 0 ? '<button class="btn primary" onclick="showAdminTab(\'deposits\')">Duyệt ' + r.pending_deposits + ' đơn nạp ngay</button>' : "");
+  } catch (e) { adminFail(e); }
+}
+
+async function adminProducts() {
+  adminLoading();
+  try {
+    const r = await rpc("admin_products", { p_admin_token: adminToken });
+    if (!r.success) { adminFail(new Error(r.error)); return; }
+    window._adminProducts = r.products;
+    let h = '<button class="btn primary" style="margin-bottom:13px" onclick="editProduct(null)">+ Thêm sản phẩm</button>';
+    h += '<div class="tablebox"><table><tr><th>Tên</th><th>Danh mục</th><th>Giá</th><th>Kho</th><th>Đã bán</th><th>Trạng thái</th><th></th></tr>';
+    for (const p of r.products) {
+      h += "<tr><td><b>" + esc(p.name) + "</b></td><td>" + esc(p.category) + "</td><td>" + fmt(p.price) + "</td><td>" + p.remaining +
+        "</td><td>" + p.sold + "</td><td>" + (p.active ? '<span class="pill active">Đang bán</span>' : '<span class="pill banned">Đã ẩn</span>') + "</td>" +
+        '<td style="white-space:nowrap"><button class="btn small" onclick="editProduct(\'' + p.id + '\')">Sửa</button> ' +
+        '<button class="btn small" onclick="manageStock(\'' + p.id + '\')">Kho</button> ' +
+        '<button class="btn small danger" onclick="deleteProduct(\'' + p.id + '\')">Xoá</button></td></tr>';
+    }
+    $("adminArea").innerHTML = h + "</table></div><div id='productForm'></div><div id='stockBox'></div>";
+  } catch (e) { adminFail(e); }
+}
+function editProduct(id) {
+  const p = id ? (window._adminProducts || []).find(x => x.id === id) : { name: "", category: "KEY", price: "", description: "", image_url: "", active: true, sort: 0 };
+  if (id && !p) return;
+  $("productForm").innerHTML =
+    '<div class="bank-box"><b>' + (id ? "Sửa sản phẩm" : "Thêm sản phẩm") + '</b><div style="height:10px"></div>' +
+    '<div class="field"><label>TÊN</label><input id="pfName" value="' + esc(p.name) + '"></div>' +
+    '<div class="field"><label>DANH MỤC (gõ tự do — shop tự hiện danh mục mới)</label><input id="pfCat" value="' + esc(p.category) + '"></div>' +
+    '<div class="field"><label>GIÁ (VNĐ)</label><input id="pfPrice" type="number" min="0" value="' + esc(p.price) + '"></div>' +
+    '<div class="field"><label>MÔ TẢ</label><textarea id="pfDesc">' + esc(p.description) + '</textarea></div>' +
+    '<div class="field"><label>LINK ẢNH (để trống = nền chữ)</label><input id="pfImg" value="' + esc(p.image_url) + '"></div>' +
+    '<div class="field"><label>THỨ TỰ HIỂN THỊ</label><input id="pfSort" type="number" value="' + esc(p.sort) + '"></div>' +
+    '<div class="field"><label><input type="checkbox" id="pfActive" ' + (p.active ? "checked" : "") + ' style="width:auto;margin-right:7px">Đang bán</label></div>' +
+    '<button class="btn primary" onclick="saveProduct(\'' + (id || "") + '\')">Lưu sản phẩm</button> ' +
+    '<button class="btn" onclick="$(\'productForm\').innerHTML=\'\'">Huỷ</button></div>';
+  $("productForm").scrollIntoView({ behavior: "smooth" });
+}
+async function saveProduct(id) {
+  try {
+    const r = await rpc("admin_save_product", {
+      p_admin_token: adminToken, p_id: id || null,
+      p_name: $("pfName").value, p_category: $("pfCat").value,
+      p_price: parseInt($("pfPrice").value, 10) || 0,
+      p_description: $("pfDesc").value, p_image_url: $("pfImg").value,
+      p_active: $("pfActive").checked, p_sort: parseInt($("pfSort").value, 10) || 0
+    });
+    if (!r.success) { toast(r.error || "Lưu thất bại"); return; }
+    toast("Đã lưu sản phẩm"); adminProducts(); loadProducts();
+  } catch (e) { toast(errText(e)); }
+}
+async function deleteProduct(id) {
+  if (!confirm("Xoá sản phẩm này và toàn bộ kho của nó?")) return;
+  try {
+    const r = await rpc("admin_delete_product", { p_admin_token: adminToken, p_id: id });
+    if (!r.success) { toast(r.error || "Xoá thất bại"); return; }
+    toast("Đã xoá"); adminProducts(); loadProducts();
+  } catch (e) { toast(errText(e)); }
+}
+async function manageStock(id) {
+  const p = (window._adminProducts || []).find(x => x.id === id);
+  $("stockBox").innerHTML = '<div class="bank-box"><b>Kho: ' + esc(p ? p.name : "") + '</b><div class="state-box"><div class="spinner"></div><b>Đang tải kho...</b></div></div>';
+  try {
+    const r = await rpc("admin_list_notes", { p_admin_token: adminToken, p_product_id: id });
+    if (!r.success) { toast(r.error || "Không tải được kho"); return; }
+    let h = '<div class="bank-box"><b>Kho: ' + esc(p ? p.name : "") + '</b>' +
+      '<p class="sub" style="margin:6px 0">Mỗi dòng là 1 món giao cho khách (key/file/ghi chú). Khách mua là hệ thống tự lấy món chưa dùng giao đi.</p>' +
+      '<div class="field"><label>THÊM HÀNG — MỖI DÒNG 1 MÓN</label><textarea id="stockAdd" style="min-height:110px" placeholder="KEY-XXXX-XXXX&#10;KEY-YYYY-YYYY"></textarea></div>' +
+      '<button class="btn primary" onclick="addStock(\'' + id + '\')">Thêm vào kho</button>' +
+      '<div style="height:14px"></div><div class="list">';
+    if (!r.notes.length) h += '<div class="state-box"><b>Kho trống</b>Thêm hàng ở ô trên.</div>';
+    for (const n of r.notes) {
+      h += '<div class="litem"><div class="grow"><div class="mono">' + esc(n.content) + '</div><div class="s">' + fmtDate(n.created_at) + '</div></div>' +
+        (n.used ? '<span class="pill approved">Đã giao</span>' : '<span class="pill pending">Chưa dùng</span> <button class="btn small danger" onclick="deleteNote(\'' + n.id + '\',\'' + id + '\')">Xoá</button>') + "</div>";
+    }
+    $("stockBox").innerHTML = h + "</div></div>";
+    $("stockBox").scrollIntoView({ behavior: "smooth" });
+  } catch (e) { toast(errText(e)); }
+}
+async function addStock(id) {
+  const lines = $("stockAdd").value.split("\n").map(s => s.trim()).filter(Boolean);
+  if (!lines.length) { toast("Chưa nhập nội dung nào"); return; }
+  try {
+    const r = await rpc("admin_add_notes", { p_admin_token: adminToken, p_product_id: id, p_contents: lines });
+    if (!r.success) { toast(r.error || "Thêm kho thất bại"); return; }
+    toast("Đã thêm " + r.added + " món vào kho"); manageStock(id); loadProducts();
+  } catch (e) { toast(errText(e)); }
+}
+async function deleteNote(noteId, productId) {
+  try {
+    const r = await rpc("admin_delete_note", { p_admin_token: adminToken, p_note_id: noteId });
+    if (!r.success) { toast(r.error || "Xoá thất bại"); return; }
+    manageStock(productId);
+  } catch (e) { toast(errText(e)); }
+}
+
+async function adminDeposits() {
+  adminLoading();
+  try {
+    const r = await rpc("admin_deposits", { p_admin_token: adminToken });
+    if (!r.success) { adminFail(new Error(r.error)); return; }
+    if (!r.deposits.length) { $("adminArea").innerHTML = '<div class="state-box"><b>Chưa có đơn nạp nào</b></div>'; return; }
+    $("adminArea").innerHTML = '<div class="list">' + r.deposits.map(d =>
+      '<div class="litem"><div class="grow"><div class="t mono">' + esc(d.code) + '</div>' +
+      '<div class="s">' + esc(d.username) + ' • ' + fmtDate(d.created_at) + '</div></div>' +
+      '<b>' + fmt(d.amount) + '</b><span class="pill ' + esc(d.status) + '">' +
+      (d.status === "pending" ? "Chờ duyệt" : d.status === "approved" ? "Đã duyệt" : "Từ chối") + "</span>" +
+      (d.status === "pending"
+        ? '<button class="btn small ok" onclick="approveDeposit(\'' + d.id + '\')">Duyệt + cộng tiền</button><button class="btn small danger" onclick="rejectDeposit(\'' + d.id + '\')">Từ chối</button>'
+        : "") + "</div>").join("") + "</div>";
+  } catch (e) { adminFail(e); }
+}
+async function approveDeposit(id) {
+  try {
+    const r = await rpc("admin_approve_deposit", { p_admin_token: adminToken, p_deposit_id: id });
+    if (!r.success) { toast(r.error || "Duyệt thất bại"); return; }
+    toast("Đã duyệt và cộng tiền"); adminDeposits();
+  } catch (e) { toast(errText(e)); }
+}
+async function rejectDeposit(id) {
+  if (!confirm("Từ chối đơn nạp này?")) return;
+  try {
+    const r = await rpc("admin_reject_deposit", { p_admin_token: adminToken, p_deposit_id: id });
+    if (!r.success) { toast(r.error || "Từ chối thất bại"); return; }
+    toast("Đã từ chối"); adminDeposits();
+  } catch (e) { toast(errText(e)); }
+}
+
+async function adminUsers() {
+  adminLoading();
+  try {
+    const r = await rpc("admin_users", { p_admin_token: adminToken });
+    if (!r.success) { adminFail(new Error(r.error)); return; }
+    let h = '<div class="tablebox"><table><tr><th>Khách</th><th>Số dư</th><th>Trạng thái</th><th>Ngày tạo</th><th></th></tr>';
+    for (const u of r.users) {
+      h += "<tr><td><b>" + esc(u.username) + "</b></td><td>" + fmt(u.balance) + "</td>" +
+        '<td><span class="pill ' + esc(u.status) + '">' + (u.status === "active" ? "Hoạt động" : "Đã khoá") + "</span></td>" +
+        "<td>" + fmtDate(u.created_at) + "</td>" +
+        '<td style="white-space:nowrap"><button class="btn small" onclick="adjustBalance(\'' + u.id + '\',\'' + esc(u.username) + '\')">± Tiền</button> ' +
+        (u.status === "active"
+          ? '<button class="btn small danger" onclick="setUserStatus(\'' + u.id + '\',\'banned\')">Khoá</button>'
+          : '<button class="btn small ok" onclick="setUserStatus(\'' + u.id + '\',\'active\')">Mở khoá</button>') + "</td></tr>";
+    }
+    $("adminArea").innerHTML = h + "</table></div>";
+  } catch (e) { adminFail(e); }
+}
+async function adjustBalance(id, username) {
+  const v = prompt("Nhập số tiền cộng (+) hoặc trừ (−) cho " + username + " (VNĐ):", "10000");
+  if (v === null) return;
+  const delta = parseInt(v, 10);
+  if (!delta) { toast("Số tiền không hợp lệ"); return; }
+  try {
+    const r = await rpc("admin_adjust_balance", { p_admin_token: adminToken, p_user_id: id, p_delta: delta });
+    if (!r.success) { toast(r.error || "Thất bại"); return; }
+    toast("Số dư mới: " + fmt(r.balance)); adminUsers();
+  } catch (e) { toast(errText(e)); }
+}
+async function setUserStatus(id, status) {
+  try {
+    const r = await rpc("admin_set_user_status", { p_admin_token: adminToken, p_user_id: id, p_status: status });
+    if (!r.success) { toast(r.error || "Thất bại"); return; }
+    toast("Đã cập nhật"); adminUsers();
+  } catch (e) { toast(errText(e)); }
+}
+
+async function adminOrders() {
+  adminLoading();
+  try {
+    const r = await rpc("admin_orders", { p_admin_token: adminToken });
+    if (!r.success) { adminFail(new Error(r.error)); return; }
+    if (!r.orders.length) { $("adminArea").innerHTML = '<div class="state-box"><b>Chưa có đơn hàng nào</b></div>'; return; }
+    let h = '<div class="tablebox"><table><tr><th>Thời gian</th><th>Khách</th><th>Sản phẩm</th><th>Giá</th></tr>';
+    for (const o of r.orders) {
+      h += "<tr><td>" + fmtDate(o.created_at) + "</td><td>" + esc(o.username) + "</td><td>" + esc(o.product_name) + "</td><td>" + fmt(o.price) + "</td></tr>";
+    }
+    $("adminArea").innerHTML = h + "</table></div>";
+  } catch (e) { adminFail(e); }
+}
+
+function adminSettings() {
+  const c = shopConfig;
+  $("adminArea").innerHTML =
+    '<div class="bank-box"><b>Cài đặt shop</b><div style="height:10px"></div>' +
+    '<div class="field"><label>TÊN SHOP</label><input id="cfName" value="' + esc(c.shop_name || "") + '"></div>' +
+    '<div class="field"><label>NGÂN HÀNG</label><input id="cfBank" value="' + esc(c.bank_name || "") + '"></div>' +
+    '<div class="field"><label>SỐ TÀI KHOẢN NHẬN TIỀN</label><input id="cfAcc" value="' + esc(c.bank_account || "") + '"></div>' +
+    '<div class="field"><label>MÃ BIN NGÂN HÀNG (cho QR VietQR — MB Bank: 970422, TPBank: 970423, VCB: 970436)</label><input id="cfBin" value="' + esc(c.bank_bin || "") + '"></div>' +
+    '<div class="field"><label>CHỦ TÀI KHOẢN</label><input id="cfHolder" value="' + esc(c.bank_holder || "") + '"></div>' +
+    '<div class="field"><label>ZALO HỖ TRỢ</label><input id="cfZalo" value="' + esc(c.support_zalo || "") + '"></div>' +
+    '<button class="btn primary" onclick="saveSettings()">Lưu cài đặt</button></div>' +
+    '<div class="bank-box"><b>Đổi mật khẩu</b><p class="sub" style="margin:6px 0 10px">Đổi mật khẩu tài khoản khách đang đăng nhập trên trình duyệt này.</p>' +
+    '<div class="field"><label>MẬT KHẨU CŨ</label><input id="pwOld" type="password"></div>' +
+    '<div class="field"><label>MẬT KHẨU MỚI</label><input id="pwNew" type="password"></div>' +
+    '<button class="btn" onclick="changeMyPassword()">Đổi mật khẩu</button></div>';
+}
+async function saveSettings() {
+  const pairs = [
+    ["shop_name", $("cfName").value], ["bank_name", $("cfBank").value],
+    ["bank_account", $("cfAcc").value], ["bank_holder", $("cfHolder").value],
+    ["bank_bin", $("cfBin").value], ["support_zalo", $("cfZalo").value]
+  ];
+  try {
+    for (const [k, v] of pairs) {
+      const r = await rpc("admin_set_config", { p_admin_token: adminToken, p_key: k, p_value: v });
+      if (!r.success) { toast(r.error || "Lưu thất bại"); return; }
+    }
+    toast("Đã lưu cài đặt"); loadConfig();
+  } catch (e) { toast(errText(e)); }
+}
+async function changeMyPassword() {
+  if (!me) { toast("Cần đăng nhập tài khoản khách trước"); return; }
+  try {
+    const r = await rpc("change_password", { p_token: sessionToken, p_old: $("pwOld").value, p_new: $("pwNew").value });
+    if (!r.success) { toast(r.error || "Đổi mật khẩu thất bại"); return; }
+    toast("Đã đổi mật khẩu");
+  } catch (e) { toast(errText(e)); }
+}
+</script>
+</body>
+</html>
