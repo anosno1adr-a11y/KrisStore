@@ -223,6 +223,39 @@ footer{padding-bottom:110px;text-align:left}
 .payrow{display:flex;gap:7px;flex-wrap:wrap;margin-top:8px}
 .payrow span{background:rgba(255,255,255,.75);border:1px solid var(--stroke);border-radius:9px;padding:5px 10px;font-size:12px;font-weight:900;color:var(--text)}
 .copyright{text-align:center;margin-top:16px;color:var(--dim2);font-size:12.5px}
+
+/* ===== COLOR v4 — Ngọc lục bảo + Vàng gold ===== */
+:root{
+  --acc:#059669; --acc2:#0d9488;
+  --grad:linear-gradient(120deg,#059669,#14b8a6 55%,#f59e0b);
+  --stroke2:rgba(5,150,105,.16);
+}
+body{background:#ecfdf5}
+body::before{background:
+ radial-gradient(700px 500px at 8% -5%,rgba(5,150,105,.36),transparent 60%),
+ radial-gradient(650px 480px at 95% 8%,rgba(245,158,11,.30),transparent 60%),
+ radial-gradient(700px 600px at 50% 110%,rgba(20,184,166,.32),transparent 60%),
+ linear-gradient(160deg,#f0fdf7,#ecfeff 45%,#fffbeb)}
+.topbar{background:linear-gradient(90deg,#065f46,#059669,#d97706)}
+.hero-main{background:linear-gradient(125deg,rgba(6,95,70,.95),rgba(5,150,105,.9) 52%,rgba(217,119,6,.88));box-shadow:0 24px 50px rgba(5,120,85,.32)}
+.hero-main h1 span,.hero h1 span{background:linear-gradient(90deg,#fde68a,#fef08a,#a7f3d0,#fde68a);background-size:200% auto;-webkit-background-clip:text;background-clip:text}
+.hero-cta .cta1{color:#065f46}
+.promo.p1{background:linear-gradient(130deg,#0d9488,#065f46)}
+.promo.p2{background:linear-gradient(130deg,#f59e0b,#dc2626)}
+.logo-mark{box-shadow:0 8px 20px rgba(5,150,105,.38)}
+.btn.primary{box-shadow:0 10px 24px rgba(5,150,105,.32)}
+.chip.on{box-shadow:0 8px 18px rgba(5,150,105,.3)}
+.viewnav button.on{box-shadow:0 8px 18px rgba(5,150,105,.28)}
+.mnav button.on{box-shadow:0 8px 18px rgba(5,150,105,.3)}
+.pcat{background:rgba(5,150,105,.1);color:#047857}
+.price{background:linear-gradient(120deg,#d97706,#f59e0b);-webkit-background-clip:text;background-clip:text;color:transparent}
+.astat .n{background:linear-gradient(120deg,#065f46,#d97706);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sec-title::before,.sec-head .bar{background:var(--grad)}
+.spinner{border-top-color:#059669}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:#059669;box-shadow:0 0 0 4px rgba(5,150,105,.13)}
+.btn:hover{border-color:rgba(5,150,105,.45)}
+.state-box{border-color:rgba(5,150,105,.32)}
+th,td{border-bottom-color:rgba(5,150,105,.1)}
 </style>
 </head>
 
