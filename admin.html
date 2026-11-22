@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>SHOP NOVA — Admin Glass</title>
+<title>KRIS STORE — Admin Glass</title>
 
 <style>
 :root{
@@ -322,7 +322,7 @@ th,td{border-bottom-color:rgba(255,255,255,.09)}
   <div class="wrap hbar">
     <div class="logo">
       <div class="logo-mark"><svg viewBox="0 0 24 24"><path d="M13 2 4.5 13.5H11L9.5 22 19 10h-6.5L13 2z"/></svg></div>
-      <span id="logoName">SHOP NOVA</span>
+      <span id="logoName">KRIS STORE</span>
     </div>
     <div class="hspace"></div>
     <div id="hdrAnon">
@@ -552,7 +552,7 @@ async function init() {
 async function loadConfig() {
   try {
     shopConfig = await rpc("get_config", {});
-    const name = shopConfig.shop_name || "SHOP NOVA";
+    const name = shopConfig.shop_name || "KRIS STORE";
     document.title = name + " — Shop Full-Stack";
     $("logoName").textContent = name;
     $("footText").textContent = name + " — Hệ thống bán hàng tự động";

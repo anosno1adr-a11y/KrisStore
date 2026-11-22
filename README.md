@@ -1,4 +1,4 @@
-# SHOP NOVA — Glass Edition
+# KRIS STORE — Glass Edition
 
 Trang shop + trang admin giao diện **Liquid Glass** (kính mờ, blur + aurora gradient), nối backend Supabase thật của shop-fullstack — bán được ngay, không phải bản demo LocalStorage.
 
