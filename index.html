@@ -256,6 +256,62 @@ body::before{background:
 .btn:hover{border-color:rgba(5,150,105,.45)}
 .state-box{border-color:rgba(5,150,105,.32)}
 th,td{border-bottom-color:rgba(5,150,105,.1)}
+
+/* ===== COLOR v5 — Dark Premium: Đêm hoàng gia + Gold ===== */
+:root{
+  --text:#f5f3ff; --dim:#b6b1d6; --dim2:#8b86ad;
+  --acc:#a78bfa; --acc2:#f472b6;
+  --grad:linear-gradient(120deg,#7c3aed,#db2777 55%,#f59e0b);
+  --glass:rgba(23,20,48,.62); --glass2:rgba(30,26,62,.78);
+  --stroke:rgba(255,255,255,.14); --stroke2:rgba(167,139,250,.2);
+  --shadow:0 18px 42px rgba(0,0,0,.42), inset 0 1px 0 rgba(255,255,255,.09);
+  --ok:#34d399; --warn:#fbbf24; --err:#fb7185;
+}
+body{background:#07081a;color:var(--text)}
+body::before{background:
+ radial-gradient(760px 520px at 6% -6%,rgba(124,58,237,.5),transparent 62%),
+ radial-gradient(680px 500px at 96% 6%,rgba(219,39,119,.34),transparent 62%),
+ radial-gradient(760px 620px at 50% 112%,rgba(8,145,178,.36),transparent 62%),
+ linear-gradient(165deg,#0b0924,#07081a 50%,#120a2e)}
+.hbar,.search,.bank-box,.litem,.astat,.tablebox,.trust .ti,.step,.foot-grid,.viewnav,.mnav{background:rgba(23,20,48,.62);backdrop-filter:blur(22px) saturate(170%);-webkit-backdrop-filter:blur(22px) saturate(170%);border-color:rgba(255,255,255,.13)}
+.btn{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.16);color:var(--text);box-shadow:0 6px 16px rgba(0,0,0,.3)}
+.btn:hover{border-color:rgba(167,139,250,.6)}
+.btn.primary{background:var(--grad);color:#fff;box-shadow:0 12px 28px rgba(219,39,119,.35)}
+.btn.ok{background:rgba(52,211,153,.13);color:#6ee7b7;border-color:rgba(52,211,153,.35)}
+.btn.danger{background:rgba(251,113,133,.12);color:#fda4af;border-color:rgba(251,113,133,.35)}
+.balance-chip,.user-chip{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.15);color:var(--text)}
+.chip{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.14);color:var(--dim)}
+.chip.on{background:var(--grad);color:#fff}
+.tabs button{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.14);color:var(--dim)}
+.tabs button.on{background:var(--grad);color:#fff}
+.viewnav button{color:var(--dim)} .viewnav button.on{background:var(--grad);color:#fff}
+.mnav button{color:var(--dim)} .mnav button.on{background:var(--grad);color:#fff}
+.field input,.field select,.field textarea{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.15);color:var(--text)}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:#a78bfa;box-shadow:0 0 0 4px rgba(167,139,250,.18)}
+.field select option{color:#111}
+.mbox{background:rgba(19,16,44,.92);border-color:rgba(255,255,255,.15)}
+.mclose{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.16);color:var(--text)}
+.state-box{background:rgba(255,255,255,.04);border-color:rgba(167,139,250,.35);color:var(--dim)}
+.state-box b{color:var(--text)}
+.pcard{background:rgba(23,20,48,.62)}
+.pcat{background:rgba(167,139,250,.16);color:#c4b5fd}
+.stock{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.14);color:var(--dim)}
+.stock.out{color:#fb7185}.stock.low{color:#fbbf24}
+.price{background:linear-gradient(120deg,#fbbf24,#f59e0b);-webkit-background-clip:text;background-clip:text;color:transparent}
+.astat .n{background:linear-gradient(120deg,#c4b5fd,#f9a8d4);-webkit-background-clip:text;background-clip:text;color:transparent}
+.topbar{background:linear-gradient(90deg,#4c1d95,#be185d,#b45309)}
+.hero-main{background:linear-gradient(125deg,rgba(76,29,149,.96),rgba(190,24,93,.9) 55%,rgba(180,83,9,.92));box-shadow:0 26px 54px rgba(190,24,93,.35)}
+.promo.p1{background:linear-gradient(130deg,#155e75,#0e7490)}
+.promo.p2{background:linear-gradient(130deg,#b45309,#be123c)}
+.payrow span{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.15);color:var(--text)}
+.foot-grid h4{color:var(--text)} .foot-grid a,.foot-grid p{color:var(--dim)}
+.msg.err{background:rgba(251,113,133,.13);color:#fecdd3;border:1px solid rgba(251,113,133,.35)}
+.msg.ok{background:rgba(52,211,153,.13);color:#a7f3d0;border:1px solid rgba(52,211,153,.35)}
+.code-big{background:rgba(255,255,255,.07);border-color:rgba(251,191,36,.45);color:#fbbf24}
+.note-out{background:rgba(52,211,153,.12);border-color:rgba(52,211,153,.35);color:#d1fae5}
+.setup-banner{background:rgba(251,191,36,.13);border-color:rgba(251,191,36,.4);color:#fde68a}
+th,td{border-bottom-color:rgba(255,255,255,.09)}
+.pill.pending{background:rgba(251,191,36,.15)} .pill.approved,.pill.active{background:rgba(52,211,153,.15)} .pill.rejected,.pill.banned{background:rgba(251,113,133,.14)}
 </style>
 </head>
 
